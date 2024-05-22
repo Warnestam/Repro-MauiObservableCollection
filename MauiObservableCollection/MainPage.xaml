@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiObservableCollection.MainPage"
+             xmlns:vm="clr-namespace:MauiObservableCollection.ViewModels"
+             >
+    <ContentPage.BindingContext>
+        <vm:MyViewModel />
+    </ContentPage.BindingContext>
+    <!--<VerticalStackLayout>--> 
+    <!--FIX FOR PROBLEM 2-->
+        <ListView x:Name="myList" HasUnevenRows="True" ItemsSource="{Binding Bag.Gadgets}" SelectionMode="None">
+            <ListView.ItemTemplate>
+                <DataTemplate >
+                    <ViewCell>
+                    <!--<VerticalStackLayout>-->
+                    <!--FIX FOR PROBLEM 1-->
+                    <Frame>
+                                <Grid >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Grid.Column="0" Orientation="Horizontal" >
+                                        <Label Text="ICON" FontSize="30" VerticalOptions="Center" />
+                                        <Label Text="{Binding Caption}" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold" />
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" HorizontalOptions="End" Orientation="Horizontal" >
+
+                                        <Label Text="ADD" FontSize="30" IsEnabled="{Binding CanAdd}">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding AddCommand}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="DEL" FontSize="30" IsEnabled="{Binding CanRemove}">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding RemoveCommand}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+                                    </StackLayout>
+                                    <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="DESCRIPTION" VerticalOptions="Center" HorizontalOptions="Start" />
+                                </Grid>
+                            </Frame>
+                        <!--</VerticalStackLayout>-->
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    <!--</VerticalStackLayout>-->
+</ContentPage>
